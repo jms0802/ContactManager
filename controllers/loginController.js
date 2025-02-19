@@ -1,5 +1,7 @@
+const express = require("express");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
+const app = express();
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 const jwtSecret = process.env.JWT_SECRET;
@@ -7,7 +9,6 @@ const jwt = require("jsonwebtoken");
 
 // Get Login Page
 // GET /
-
 const getLogin = (req, res) => {
     const cookies = req.headers.cookie ? req.headers.cookie.split('; ') : [];
     const tokenCookie = cookies.find(cookie => cookie.startsWith('token='));
@@ -63,8 +64,8 @@ const registerUser = asyncHandler(async (req, res) => {
 
 // Logout user
 // POST /logout
-const logoutUser = asyncHandler(async(req, res) => {
-    res.clearCookie('token');
+const logoutUser = asyncHandler(async (req, res) => {
+    res.clearCookie('token');;
     res.redirect('/');
 })
 
